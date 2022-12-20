@@ -19,13 +19,23 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::controller('/login', LoginController::class)->group(function () {
-    Route::get('/login', [LoginController::class, 'index']);
-    Route::post('/login', [LoginController::class, 'authenticate']);
+Route::controller('login', LoginController::class)->group(function () {
+    Route::get('login', [LoginController::class, 'index']);
+    Route::post('login', [LoginController::class, 'authenticate']);
 });
 
-Route::controller('/voting', [CandidateController::class, 'index'])->group(function () {
-    Route::get('/voting', [CandidateController::class, 'index'])->name('voting');
+Route::controller('voting', [CandidateController::class, 'index'])->group(function () {
+    Route::get('voting', [CandidateController::class, 'index'])->name('voting')->middleware('auth');
     // Route::post('/candidate', [CandidateController::class, 'vote']);
-    Route::post('/voting/{id}', [CandidateController::class, 'vote']);
+    Route::post('/voting/{id}', [CandidateController::class, 'vote'])->middleware('auth');
 })->middleware('auth');
+
+Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::post('dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');

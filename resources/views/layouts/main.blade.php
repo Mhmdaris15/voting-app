@@ -8,6 +8,10 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+    @include('partials.navbar')
+    {{-- @if (Auth::check())
+        @include('partials.sidebar')
+    @endif --}}
     @yield('content')
     @vite('resources/js/app.js')
     @vite('resources/js/flowbite.js')
