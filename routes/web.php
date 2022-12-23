@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,8 @@ Route::get('/welcome', function () {
 });
 
 Route::controller('login', LoginController::class)->group(function () {
-    Route::get('login', [LoginController::class, 'index']);
-    Route::post('login', [LoginController::class, 'authenticate']);
+    Route::get('login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+    Route::post('login', [LoginController::class, 'authenticate'])->middleware('guest');
 });
 
 Route::controller('voting', [CandidateController::class, 'index'])->group(function () {
@@ -32,10 +33,10 @@ Route::controller('voting', [CandidateController::class, 'index'])->group(functi
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('dashboard', function () {
+//
+//    return view('dashboard');
+//})->middleware('auth')->name('dashboard');
 
-Route::post('dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('dashboard', [UserController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::post('dashboard', [UserController::class, 'postIndex'])->middleware('auth');
