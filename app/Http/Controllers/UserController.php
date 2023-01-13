@@ -46,9 +46,9 @@ class UserController extends Controller
                         }),
                         'tabChoosen' => 'statistics'
                     ]);
-                case 'setting':
+                case 'candidates':
                     return view('dashboard', [
-                        'tabChoosen' => 'setting'
+                        'tabChoosen' => 'candidates'
                     ]);
                 case 'contacts':
                     return view('dashboard', [

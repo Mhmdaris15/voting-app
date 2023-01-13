@@ -1,7 +1,7 @@
 
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-      <a href="{{ url('/welcome') }}" class="flex items-center">
+      <a href="{{ url('/') }}" class="flex items-center">
           <img src="{{ Vite::asset('resources/images/logo-nevtik.png') }}" class="h-16 mr-3 sm:h-9" alt="NEVTIK Logo" />
           <span class="self-center text-xl font-bold whitespace-nowrap dark:text-white">NEVTIK SIP</span>
       </a>
@@ -23,9 +23,11 @@
           <li>
             <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
           </li>
+          @guest
           <li>
             <a href="{{ url('login') }}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
           </li>
+          @endguest
         </ul>
       </div>
     </div>

@@ -30,9 +30,9 @@
                 <form action="{{ url('dashboard') }}" method="post">
                     @csrf
                     <li class="mr-2">
-                        <input type="hidden" name="tab-choosen" value="setting">
-                        <button href="#" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent {{ ($tabChoosen == 'setting')? 'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' }} group">
-                            <svg aria-hidden="true" class="mr-2 w-5 h-5 {{ ($tabChoosen == 'setting')? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" clip-rule="evenodd"></path></svg>Settings
+                        <input type="hidden" name="tab-choosen" value="candidates">
+                        <button href="#" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent {{ ($tabChoosen == 'candidates')? 'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' }} group">
+                            <svg aria-hidden="true" class="mr-2 w-5 h-5 {{ ($tabChoosen == 'candidates')? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" clip-rule="evenodd"></path></svg>Candidates
                         </button>
                     </li>
                 </form>
