@@ -10,15 +10,15 @@ class CandidateController extends Controller
 {
     public function index()
     {
-        $candidates = Candidate::all();
+        $candidates = Candidate::with('users')->get();
         $not_voted = User::where('candidate_id', null)->count();
-        // return view('voting', compact('candidates')); 
+        // return view('voting', compact('candidates'));
         return view('voting', [
             'user' => auth()->user(),
             'candidates' => $candidates,
             'n_users' => User::count(),
             'n_not_voted' => $not_voted,
-        ]); 
+        ]);
     }
 
     public function vote(Request $request, $id)

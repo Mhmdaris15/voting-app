@@ -16,6 +16,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/', function(){
+    return view('home');
+});
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -40,3 +44,6 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 Route::get('dashboard', [UserController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::post('dashboard', [UserController::class, 'postIndex'])->middleware('auth');
+
+Route::put('dashboard/{user:id}', [UserController::class, 'update'])->middleware('auth');
+Route::delete('dashboard/{user:id}', [UserController::class, 'destroy'])->middleware('auth');

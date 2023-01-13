@@ -50,8 +50,10 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
+//    Belongs to Candidate
     public function candidate(){
-        return $this->belongsTo(Candidate::class);
+        return $this->belongsTo(Candidate::class, 'candidate_id');
     }
 
     public function setPasswordAttribute($value)

@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
+@section('title', 'Login Page')
+
 @section('content')
-    
+
 @if (session('status'))
 <div class="alert alert-success">
     {{ session('status') }}
@@ -87,5 +89,5 @@
 </div>
 </form>
 
-    
+
 @endsection

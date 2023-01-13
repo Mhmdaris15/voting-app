@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Dashboard')
+
 @section('content')
     <div class="flex gap-5">
         @include('partials.sidebar')
@@ -19,9 +21,9 @@
                 <form action="{{ url('dashboard') }}" method="post">
                     @csrf
                     <li class="mr-2">
-                        <input type="hidden" name="tab-choosen" value="dashboard">
-                        <button href="#" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent {{ ($tabChoosen == 'dashboard')? 'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' }} group">
-                            <svg aria-hidden="true" class="mr-2 w-5 h-5 {{ ($tabChoosen == 'dashboard')? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" clip-rule="evenodd"></path></svg>Dashboard
+                        <input type="hidden" name="tab-choosen" value="statistics">
+                        <button href="#" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent {{ ($tabChoosen == 'statistics')? 'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' }} group">
+                            <svg aria-hidden="true" class="mr-2 w-5 h-5 {{ ($tabChoosen == 'statistics')? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" clip-rule="evenodd"></path></svg>Statistics
                         </button>
                     </li>
                 </form>
@@ -49,6 +51,13 @@
             </ul>
             @if($tabChoosen == 'students')
                 @include('dashboard.studenttable', ['students' => $students])
+            @endif
+            @if($tabChoosen == 'statistics')
+                @include('dashboard.statistics', [
+                    'candidates' => $candidates,
+                    'candidate_names' => $candidate_names,
+                    'n_candidate_voters' => $n_candidate_voters,
+                    ])
             @endif
         </div>
     </div>

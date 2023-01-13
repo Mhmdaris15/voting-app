@@ -1,10 +1,12 @@
 @extends('layouts.main')
 
+@section('title', 'Voting Page')
+
 @section('content')
 
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -29,15 +31,15 @@
       </form>
       @if (empty(Auth::user()->candidate_id))
         <p class="w-auto py-2 px-4 rounded-xl inline-block border-dotted border-black border-4 text-2xl font-extrabold bg-red-500 text-gray-900 mb-5">You haven't voted yet</p>
-       @else 
+       @else
         <p class="w-auto py-2 px-4 rounded-xl inline-block border-dotted border-black border-4 text-2xl font-extrabold bg-green-500 text-gray-100 mb-5">Your vote is {{ Auth::user()->candidate_id }}</p>
       @endif
-      
-      
+
+
       <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        
+
         @foreach ($candidates as $candidate)
-            
+
         <form action="{{ url('voting') }}/{{ $candidate->id }}" method="post">
           @csrf
           <div class="cursor-pointer" data-modal-toggle="{{ $candidate->name }}" class="group">
@@ -65,7 +67,7 @@
               </button>
           </div>
           <!-- Modal body -->
-          
+
           <div class="m-auto my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img class="rounded-t-lg" src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="" />
@@ -115,7 +117,7 @@
 
         @endforeach
 
-  
+
         <!-- More products... -->
       </div>
       {{-- Statistics --}}
@@ -123,7 +125,7 @@
       <p>Who haven't voted yet : {{ $n_not_voted }} </p>
 
       {{-- Card --}}
-      
+
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
@@ -136,6 +138,6 @@
 </div>
 
     </div>
-  </div>    
+  </div>
 
 @endsection
