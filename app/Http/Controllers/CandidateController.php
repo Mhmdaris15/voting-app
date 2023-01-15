@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Candidate;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class CandidateController extends Controller
 {
@@ -30,6 +31,7 @@ class CandidateController extends Controller
         auth()->user()->candidate_id = $id;
 
         auth()->user()->save();
+        Cache::flush();
 
         return redirect()->route('voting');
     }

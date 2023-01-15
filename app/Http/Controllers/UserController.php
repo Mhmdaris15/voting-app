@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UserJob;
 use App\Models\Candidate;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,11 +17,14 @@ class UserController extends Controller
     {
 //        $user = User::all();
 //        $candidate = $user->candidate()->paginate(7);
-        $users = User::with('candidate')->get();
+        $users = User::with('candidate')->paginate();
+        // $users = Cache::remember('users', 3600, function () {
+        //     return User::with('candidate')->paginate(10);
+        // });
         $candidates = Candidate::all();
         return view('dashboard', [
 //            'students' => DB::table('users')->paginate(7),
-            'students'=> $users,
+            'students'=> Cache::has('users') ? Cache::get('users') : $users,
             'candidates'=> $candidates,
             'tabChoosen' => 'students',
         ]);
@@ -27,13 +32,18 @@ class UserController extends Controller
 
     public function postIndex(Request $request){
         if($request->has('tab-choosen')){
-            $users = User::with('candidate')->get();
+            
             $candidates = Candidate::with('users')->get();
             switch ($request->get('tab-choosen')){
                 case 'students':
+                    $users = User::with('candidate')->paginate(10);
+                    // $users = cache()->remember('users', 3600, function () {
+                    //     return User::with('candidate')->paginate(10);
+                    // });
+                    // Chace for 2 hours
                     return view('dashboard', [
-//                        'students' => DB::table('users')->paginate(7),
-                        'students'=> $users,
+//                       
+                        'students'=> Cache::has('users') ? Cache::get('users') : $users,
                         'candidates'=> $candidates,
                         'tabChoosen' => 'students'
                     ]);
@@ -51,6 +61,10 @@ class UserController extends Controller
                         'tabChoosen' => 'candidates'
                     ]);
                 case 'contacts':
+                    // Job Here
+                    $job = new UserJob();
+                    $this->dispatch($job);
+                    Cache::flush();
                     return view('dashboard', [
                         'tabChoosen' => 'contacts'
                     ]);
@@ -80,6 +94,8 @@ class UserController extends Controller
         $user->password = $request->get('password');
         $user->candidate_id = $request->get('candidate_id');
         $user->save();
+        Cache::flush();
+
         return redirect()->route('dashboard')->with('success', 'Data '.$old_name.' was updated');
     }
 
@@ -87,6 +103,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+        Cache::flush();
         return redirect()->route('dashboard')->with('success', 'User deleted successfully');
     }
 }
