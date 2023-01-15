@@ -47,3 +47,5 @@ Route::post('dashboard', [UserController::class, 'postIndex'])->middleware('auth
 
 Route::put('dashboard/{user:id}', [UserController::class, 'update'])->middleware('auth');
 Route::delete('dashboard/{user:id}', [UserController::class, 'destroy'])->middleware('auth');
+
+Route::post('generate', [UserController::class, 'generate'])->middleware('auth');

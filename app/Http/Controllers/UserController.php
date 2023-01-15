@@ -60,18 +60,24 @@ class UserController extends Controller
                     return view('dashboard', [
                         'tabChoosen' => 'candidates'
                     ]);
-                case 'contacts':
+                case 'generate-data':
                     // Job Here
-                    $job = new UserJob();
-                    $this->dispatch($job);
+                    // $job = new UserJob();
+                    // $this->dispatch($job);
                     Cache::flush();
                     return view('dashboard', [
-                        'tabChoosen' => 'contacts'
+                        'tabChoosen' => 'generate-data'
                     ]);
 
             }
         }
+    }
 
+    public function generate(Request $request){
+        $job = new UserJob();
+        $this->dispatch($job);
+        $this->dispatch($job);
+        return redirect()->route('dashboard')->with('success', 'Data generated successfully');
     }
 
     public function update(Request $request, $id){
