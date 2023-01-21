@@ -42,8 +42,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middl
 //    return view('dashboard');
 //})->middleware('auth')->name('dashboard');
 
-Route::get('dashboard', [UserController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::post('dashboard', [UserController::class, 'postIndex'])->middleware('auth');
+Route::get('dashboard', [UserController::class, 'index'])->middleware(['auth', 'admin'])->name('dashboard');
+Route::post('dashboard', [UserController::class, 'postIndex'])->middleware('auth')->name('dashboard');
 
 Route::put('dashboard/{user:id}', [UserController::class, 'update'])->middleware('auth');
 Route::delete('dashboard/{user:id}', [UserController::class, 'destroy'])->middleware('auth');

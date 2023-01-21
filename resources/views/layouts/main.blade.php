@@ -15,8 +15,8 @@
     @endif --}}
     @yield('content')
     @vite('resources/js/app.js')
-    @vite('resources/js/flowbite.js')
     @vite('resources/js/jquery-3.6.3.slim.min.js')
+    @vite('resources/js/flowbite.js')
     @vite('resources/js/chart.js')
     @stack('scripts')
 </body>

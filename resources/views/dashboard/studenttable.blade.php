@@ -1,3 +1,51 @@
+<div class="flex gap-x-6 py-2">
+    <div>
+        <button id="dropdownKelasButton" data-dropdown-toggle="dropdownKelas" data-dropdown-placement="bottom" class="w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Kelas<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+        <!-- Dropdown Kelas -->
+        <div id="dropdownKelas" class="z-10 hidden bg-white rounded shadow w-36 dark:bg-gray-700">
+            <ul class="h-60 py-1 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownKelasButton">
+                @foreach ($classes as $class)
+                <li>
+                    {{-- action will be current url + class=$class --}}
+                    <form method="GET" action="{{ url('dashboard') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        {{-- @csrf --}}
+                        <input type="hidden" name="filterBy">
+                        {{-- <input type="hidden" name="class" value="{{ $class }}"> --}}
+                        {{-- convert class to url string format --}}
+                        <input type="hidden" name="class" value="{{ str_replace(' ', '%20', $class) }}">
+                        <button type="submit">{{ $class }}</button>
+                    </form>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    <div>
+        <button id="dropdownStatusVotingButton" data-dropdown-toggle="dropdownStatusVoting" data-dropdown-placement="bottom" class="w-36 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Status Voting<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+        <!-- Dropdown menu -->
+        <div id="dropdownStatusVoting" class="z-10 hidden bg-white rounded shadow w-36 dark:bg-gray-700">
+            <ul class="h-30 py-1 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownStatusVotingButton">
+                <li>
+                <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    Voted
+                </a>
+                </li>
+                <li>
+                <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    Not Voted
+                </a>
+                </li>
+            </ul>
+        
+        </div>
+    </div>
+    @if (request()->has('filterBy') || request()->has('class'))
+        <span class="flex justify-center items-center bg-yellow-100 text-yellow-600 text-md font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 ">{{ str_replace('%20', ' ', request()->get('class')) }}</span>
+    @else 
+        <span class="flex justify-center items-center bg-yellow-100 text-yellow-600 text-md font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 ">All</span>
+        @endif
+</div>
+
 <div class="px-10 overflow-x-auto relative shadow-md sm:rounded-lg">
     @if(session()->has('success'))
     <div id="toast-danger" class="flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
@@ -14,6 +62,10 @@
     </div>
 
     @endif
+    
+
+    
+
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -36,6 +88,12 @@
                 NISN
             </th>
             <th scope="col" class="py-3 px-6">
+                Role
+            </th>
+            <th scope="col" class="py-3 px-6">
+                Kelas
+            </th>
+            <th scope="col" class="py-3 px-6">
                 Selected Candidate
             </th>
             <th scope="col" class="py-3 px-6">
@@ -53,8 +111,13 @@
                     <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                 </div>
             </td> --}}
+            {{-- get page params from pagination --}}
+            @php
+                $page = request()->query('page');
+                $page = $page ? $page : 1;
+            @endphp
             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{ $loop->iteration }}
+                {{ ($page - 1) * 15 + $loop->iteration }}
             </th>
             <td class="py-4 px-6">
                 {{ $student->name }}
@@ -65,8 +128,15 @@
             <td class="py-4 px-6">
                 {{ $student->nisn }}
             </td>
+            <td class="py-4 px-6">
+                {{ $student->role }}
+            </td>
+            <td class="py-4 px-6">
+                {{ $student->class }}
+            </td>
             <td class="py-4 px-6 {{ empty($student->candidate_id)? 'text-red-600' : 'text-green-700' }}">
                 {{ $student->candidate->name ?? 'Not Selected' }}
+                {{-- {{ empty($student->candidate_id)? 'Not Selected' : 'Selected' }} --}}
             </td>
             <td class="py-4 px-6 flex">
                 {{-- <form action="{{ url('dashboard') }}/{{ $student->id }}" method="post"> --}}
@@ -104,7 +174,17 @@
         @endforeach
         </tbody>
     </table>
+    {{-- Check if there is a request named filterBy or class--}}
+    @if (request()->has('filterBy') || request()->has('class'))
+        {{-- {{ $students->appends(['filterBy' => request()->filterBy, 'class' => request()->class])->links() }} --}}
+        {{ $students->withQueryString()->links() }}
+    @else
    {{ $students->links() }}
+    @endif
 </div>
 
-
+@push('scripts')
+    <script>
+        // filter by class
+    </script>
+@endpush

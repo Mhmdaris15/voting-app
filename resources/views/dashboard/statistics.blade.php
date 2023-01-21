@@ -1,19 +1,25 @@
-<div class="w-[40em] h-auto m-auto my-10">
+<div class="w-[60em] h-auto m-auto my-10">
     <canvas id="myChart"></canvas>
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/jquery-3.6.3.slim.min.js') }}" ></script>
-    <script src="{{ asset('js/chart.js') }}" ></script>
+    <script src="{{ asset('js/jquery-3.6.3.slim.min.js') }}"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/chartjs-plugin-datalabels.js') }}"></script>
+
     <script type="text/javascript">
-        const candidate_names = @json($candidate_names);
+        // import ChartDataLabels from 'chartjs-plugin-datalabels';
+        // import {Chart} from 'chart.js';
+
+        let candidate_names = @json($candidate_names);
         // generate n_candidate_voters random colors
-        const n_candidate_voters = @json($n_candidate_voters);
-        const n_candidate_voters_length = n_candidate_voters.length;
-        const candidate_colors = [];
+        let n_candidate_voters = @json($n_candidate_voters); // The number of Voters each candidate has
+        let n_candidate_voters_length = n_candidate_voters.length - 1;
+        let candidate_colors = [];
         for (let i = 0; i < n_candidate_voters_length; i++) {
             candidate_colors.push('#' + Math.floor(Math.random() * 16777215).toString(16));
         }
+        candidate_colors.push('#808080');
         const data = {
             labels: candidate_names,
             datasets: [{
@@ -47,16 +53,21 @@
                                 sum += data;
                             });
                             let percentage = (value*100 / sum).toFixed(2)+"%";
-                            return percentage;
+                            return ['Count : ' + value, 'Percentage : ' + percentage];
                         },
                         color: '#fff',
+                        font: {
+                            weight: 'bold',
+                        }
                     }
                 }
             },
+            plugins: [ChartDataLabels],
         };
         const myChart = new Chart(
             document.getElementById('myChart'),
-            config
+            config,
+            
         );
     </script>
 @endpush
