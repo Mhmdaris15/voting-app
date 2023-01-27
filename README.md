@@ -74,3 +74,18 @@ Admin ->
 	Add & Delete The candidates (Name, Vision and Missions)
 	Manage the members (Name, NISN, and Voting Status)
 	Statistics of Candidates
+
+# How to Open the project?
+Tutorial Pull nya :
+
+`git pull origin main`
+`php artisan migrate:fresh`
+`php artisan db:seed --class=CandidateSeeder`
+`php artisan db:seed --class=UserSeeder`
+
+New Terminal (Mesti Running buat generate ratusan data lebih cepet)
+`php artisan queue:work`
+
+Buka Website nya, login pake user admin (admin@gmail.com pw: 123456)
+Open Dashboard => Generate Data => Click Red Button => Yes I am sure
+Tunggu sekitar 1 menit, terus ke tab students, Hard Refresh
