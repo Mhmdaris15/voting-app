@@ -93,8 +93,8 @@ class UserController extends Controller
                     ]);
                 case 'generate-data':
                     // Job Here
-                    // $job = new UserJob();
-                    // $this->dispatch($job);
+                    $job = new UserJob();
+                    $this->dispatch($job);
                     Cache::flush();
                     return view('dashboard', [
                         'tabChoosen' => 'generate-data'
