@@ -31,7 +31,8 @@ class UserJob implements ShouldQueue
      */
     public function handle()
     {
-        // Create 1000 Users
-        $users = User::factory(100)->create();
+        // Create 100 Users
+        // $users = User::factory(100)->create();
+
     }
 }
