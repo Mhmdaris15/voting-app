@@ -15,29 +15,37 @@ class UserController extends Controller
 //    Show all users
     public function index(Request $request)
     {
-        if($request->has('filterBy') || $request->has('class')){
+        $users = User::with('candidate');
+
+        if($request->has('class')){
             // parse class from %20 to space
             $class_parsed = str_replace('%20', ' ', $request->get('class'));
             $users = User::with('candidate')->where('class', $class_parsed);
-            $users = $users->paginate(15);
-            $candidates = Candidate::all();
-            $classes = User::select('class')->distinct()->get();
-            $classes = $classes->map(function ($class){
-                return $class->class;
-            });
-            return view('dashboard', [
-                'students'=> $users,
-                'candidates'=> $candidates,
-                'tabChoosen' => 'students',
-                'classes' => $classes->sort()->values(),
-            ]);
+            // if ($request->has('voteStatus')){
+            //     $users = $request->get('votestatus') == '1' ? $users->whereNotNull('candidate_id') : $users->whereNull('candidate_id');
+            // }
+            // $users = $users->paginate(15);
+            // $candidates = Candidate::all();
+            // $classes = User::select('class')->distinct()->get();
+            // $classes = $classes->map(function ($class){
+            //     return $class->class;
+            // });
+            // return view('dashboard', [
+            //     'students'=> $users,
+            //     'candidates'=> $candidates,
+            //     'tabChoosen' => 'students',
+            //     'classes' => $classes->sort()->values(),
+            // ]);
+        }
+        if ($request->has('votestatus')){
+            $users = $request->get('votestatus') == '1' ? $users->whereNotNull('candidate_id') : $users->where('candidate_id', null);
         }
 //        $user = User::all();
 //        $candidate = $user->candidate()->paginate(7);
-        $users = User::with('candidate')->paginate(15);
         // $users = Cache::remember('users', 3600, function () {
         //     return User::with('candidate')->paginate(10);
         // });
+        $users = $users->paginate(15);
         $candidates = Candidate::all();
         $classes = User::select('class')->distinct()->get();
         $classes = $classes->map(function ($class){
@@ -89,7 +97,8 @@ class UserController extends Controller
                     ]);
                 case 'candidates':
                     return view('dashboard', [
-                        'tabChoosen' => 'candidates'
+                        'tabChoosen' => 'candidates',
+                        'candidates' => collect($candidates)
                     ]);
                 case 'generate-data':
                     // Job Here

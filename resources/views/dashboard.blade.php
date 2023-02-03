@@ -59,6 +59,9 @@
                     'n_candidate_voters' => $n_candidate_voters,
                     ])
             @endif
+            @if($tabChoosen == 'candidates')
+                @include('dashboard.candidates', ['candidates' => $candidates])
+            @endif
             @if($tabChoosen == 'generate-data')
                 @include('dashboard.generateData')
             @endif
