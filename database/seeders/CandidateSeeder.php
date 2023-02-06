@@ -20,21 +20,53 @@ class CandidateSeeder extends Seeder
             'name' => 'Angela Merkel',
             'photo' => 'angela-merkel.jpg',
             'votes' => 0,
+            'vision' => 'Mengembangkan ekonomi negara',
+            'missions' => json_encode([
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+            ]),
         ]);
         Candidate::create([
             'name' => 'Recep Tayyip Erdoğan',
             'photo' => 'erdogan.jpg',
             'votes' => 0,
+            'vision' => 'Mengembangkan ekonomi negara',
+            'missions' => json_encode([
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+            ]),
         ]);
         Candidate::create([
             'name' => 'Xi Jinping',
             'photo' => 'xi-jinping.jpg',
             'votes' => 0,
+            'vision' => 'Mengembangkan ekonomi negara',
+            'missions' => json_encode([
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+            ]),
         ]);
         Candidate::create([
             'name' => 'Vladimir Putin',
             'photo' => 'vladimir-putin.jpg',
             'votes' => 0,
+            'vision' => 'Mengembangkan ekonomi negara',
+            'missions' => json_encode([
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+                'Mengembangkan ekonomi negara',
+            ]),
         ]);
     }
 }

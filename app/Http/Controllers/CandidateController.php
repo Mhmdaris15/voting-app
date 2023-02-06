@@ -33,6 +33,25 @@ class CandidateController extends Controller
         auth()->user()->save();
         Cache::flush();
 
+        // Auto Logout after voted
+        auth()->logout();
+
+        return redirect()->route('voting');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255|min:3|unique:candidates|regex:/^[a-zA-Z ]+$/',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $candidate = Candidate::create([
+            "name" => $request->name,
+            "photo" => $request->file('photo')->store('images', 'public'),
+            "vision" => $request->vision,
+            "missions" => json_encode($request->missions)
+        ]);
         return redirect()->route('voting');
     }
 }

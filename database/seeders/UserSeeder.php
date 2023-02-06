@@ -27,17 +27,18 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
-        // User::factory(7)->create();
-        $open = fopen(storage_path("app\users.csv"), "r");
-        while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
-            User::create([
-                'name' => $data[1],
-                'email' => $data[4],
-                'class' => $data[2],
-                'NISN' => $data[3],
-                'password' => $data[5]
-            ]);
-        }
+        User::factory(30)->create();
+        // $open = fopen(storage_path("app\users.csv"), "r");
+        // while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+        //     User::create([
+        //         'candidate_id' => random_int(1, 4),
+        //         'name' => $data[1],
+        //         'email' => $data[4],
+        //         'class' => $data[2],
+        //         'NISN' => $data[3],
+        //         'password' => $data[5]
+        //     ]);
+        // }
 
     }
 }

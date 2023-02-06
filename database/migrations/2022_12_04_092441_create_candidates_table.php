@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->integer('votes')->default(0);
             $table->string('vision')->nullable();
-            $table->string('mission')->nullable();
+            $table->json('missions')->nullable();
             $table->timestamps();
         });
     }
