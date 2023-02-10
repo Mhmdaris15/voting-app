@@ -45,13 +45,15 @@ class CandidateController extends Controller
             'name' => 'required|max:255|min:3|unique:candidates|regex:/^[a-zA-Z ]+$/',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        $photo = $request->file('photo');
+        $filename = $photo->getClientOriginalName();
         $candidate = Candidate::create([
             "name" => $request->name,
-            "photo" => $request->file('photo')->store('images', 'public'),
+            "photo" => $filename,
             "vision" => $request->vision,
-            "missions" => json_encode($request->missions)
+            "missions" => json_encode(explode(',', json_encode($request->all_missions))),
         ]);
-        return redirect()->route('voting');
+        $photo->move(base_path('/resources/images'), $filename);
+        return redirect()->route('voting')->with('success', 'Candidate has been added');
     }
 }

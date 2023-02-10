@@ -25,6 +25,7 @@ class User extends Authenticatable
         'nisn',
         'email',
         'password',
+        'candidate_id',
     ];
 
     /**

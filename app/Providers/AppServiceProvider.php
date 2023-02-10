@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Foundation\Vite;
+use Illuminate\Support\Facades\Vite as FacadesVite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // FacadesVite::macro('image', fn ($asset) => FacadesVite::asset($asset)->withQuery(['type' => 'image']));
     }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="flex gap-5">
-        @include('partials.sidebar')
+        {{-- @include('partials.sidebar') --}}
 
     {{-- Tabs --}}
         <div class="flex-1 inline-block border-b border-gray-200 dark:border-gray-700">

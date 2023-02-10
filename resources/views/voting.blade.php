@@ -39,7 +39,7 @@
       
       <!-- Modal toggle -->
       <button data-modal-target="add-candidate-modal" data-modal-toggle="add-candidate-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-        Toggle modal
+        Add Candidate
       </button>
 
       <!-- Main modal -->
@@ -55,6 +55,7 @@
                       <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
                       <form class="space-y-6" action="{{ url('voting') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="all_missions" id="all_missions">
                           <div>
                               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate Name</label>
                               <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Joko Widodo" required>
@@ -71,8 +72,8 @@
                             <label for="missions" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate's Mission</label>
                             {{-- <input type="text" name="mission" id="mission" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Create a great event" required> --}}
                             <div id="mission_fields">
-                              <input type="text" name="missions[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                               <button type="button" id="add_mission_field" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add Mission</button>
+                              <input type="text" name="missions[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                             </div>
                           </div>
                           
@@ -94,7 +95,7 @@
           @csrf
           <div cass="cursor-pointer" data-modal-toggle="{{ $candidate->name }}" class="group">
             <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-              <img src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full object-cover object-center group-hover:opacity-75">
+              <img src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-72 h-72 object-cover object-center group-hover:opacity-75">
             </div>
             <h3 class="mt-4 text-sm text-gray-700">{{ $candidate->name }}</h3>
             {{-- <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->votes }}</p> --}}
@@ -122,7 +123,7 @@
           <!-- Modal body -->
 
           <div class="m-auto my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
+            <a href="#" class="">
                 <img class="rounded-t-lg" src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="" />
             </a>
             <div class="p-5">
@@ -130,7 +131,7 @@
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $candidate->vision }}</p>
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Misi</h5>
                   @php
-                    $missions = json_decode($candidate->missions);   
+                    $missions = json_decode($candidate->missions);
                   @endphp
               @foreach ($missions as $mission)
                   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $mission }}</p>
@@ -150,7 +151,7 @@
       </div>
   </div>
 </div>
-          <button type="button" class="my-3 py-1 px-4 block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 disabled:opacity-25" {{ (Auth::user()->candidate_id) ? 'disabled' : ''}} data-modal-toggle="vote-confirmation-{{ $candidate->id }}">
+          <button type="button" class="my-3 block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 disabled:opacity-25" {{ (Auth::user()->candidate_id) ? 'disabled' : ''}} data-modal-toggle="vote-confirmation-{{ $candidate->id }}">
             Vote
           </button>
           <div id="vote-confirmation-{{ $candidate->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
@@ -192,11 +193,20 @@
 @push('scripts')
 <script src="{{ asset('js/jquery-3.6.3.slim.min.js') }}"></script>
 <script type="text/javascript">
+  let all_missions = [];
   $(document).ready(function(){
     $('#add_mission_field').click(function(){
       $('#mission_fields').append(`
       <div class="flex items-center space-x-2"><input type="text" name="mission[]" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="Mission" /><button type="button" id="remove_field" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove</button></div>
       `);
+    });
+
+    $('#mission_fields').on('change', function(){
+      all_missions = [];
+      $('#mission_fields input').each(function(){
+        all_missions.push($(this).val());
+      });
+      $('#all_missions').val(all_missions); // reset all missions
     });
 
     $('#mission_fields').on('click', '#remove_field', function(e){
