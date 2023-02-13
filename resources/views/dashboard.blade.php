@@ -44,9 +44,7 @@
                         </button>
                     </li>
                 </form>
-                <li>
-                    <a class="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">Disabled</a>
-                </li>
+                
             </ul>
             @if($tabChoosen == 'students')
                 @include('dashboard.studenttable', ['students' => $students])
