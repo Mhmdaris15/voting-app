@@ -4,6 +4,12 @@
 
 @section('content')
 
+<img class="absolute left-[10%] top-[40%] md:left-[40%]" src="{{ Vite::asset('/resources/images/png-assets/Tech Life - Blockchain.png') }}" alt="Blockchain">
+<div class="absolute w-full flex justify-around items-center">
+  <img src="{{ Vite::asset('/resources/images/png-assets/taxi-design.gif') }}" alt="Taxi Design">
+  <img src="{{ Vite::asset('/resources/images/png-assets/taxi-delivery-3.gif') }}" alt="Taxi Delivery">
+
+</div>
 @if (session('status'))
 <div class="alert alert-success">
     {{ session('status') }}
@@ -34,15 +40,15 @@
     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
     <p class="mt-2 text-center text-sm text-gray-600">
       Or
-      <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
+      <a href="https://wa.me/+6285814045755" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">Contact The Admin if you haven't registered.</a>
     </p>
   </div>
-  <form class="mt-8 space-y-6" action="#" method="POST">
+  <form class="mt-8 space-y-6" action="#" method="POST" class="">
     {{-- <input type="hidden" name="remember" value="true"> --}}
     <div class="-space-y-px rounded-md shadow-sm">
       <div>
         <label for="email-address" class="sr-only">Email address</label>
-        <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 p-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address">
+        <input id="email-address" name="email" type="email" autocomplete="email" required class="relative opacity-80 block w-full appearance-none rounded-none rounded-t-md border border-gray-300 p-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address">
       </div>
       {{-- <div>
         <label for="nisn" class="sr-only">NISN</label>
@@ -50,7 +56,7 @@
       </div> --}}
       <div>
         <label for="password" class="sr-only">Password</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 p-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password">
+        <input id="password" name="password" type="password" autocomplete="current-password" required class="relative opacity-80 block w-full appearance-none rounded-none rounded-b-md border border-gray-300 p-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password">
       </div>
 
       {{-- Error --}}
@@ -88,6 +94,6 @@
 </div>
 </div>
 </form>
-
-
+<svg class="absolute bottom-0 z-[-1] opacity-90 xl:invisible sm:visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#000b76" fill-opacity="1" d="M0,128L40,112C80,96,160,64,240,58.7C320,53,400,75,480,106.7C560,139,640,181,720,208C800,235,880,245,960,245.3C1040,245,1120,235,1200,192C1280,149,1360,75,1400,37.3L1440,0L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+<svg class="absolute bottom-0 z-[-1] opacity-90 invisible xl:visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#000b76" fill-opacity="1" d="M0,160L20,160C40,160,80,160,120,160C160,160,200,160,240,181.3C280,203,320,245,360,256C400,267,440,245,480,213.3C520,181,560,139,600,128C640,117,680,139,720,165.3C760,192,800,224,840,245.3C880,267,920,277,960,272C1000,267,1040,245,1080,202.7C1120,160,1160,96,1200,106.7C1240,117,1280,203,1320,224C1360,245,1400,203,1420,181.3L1440,160L1440,320L1420,320C1400,320,1360,320,1320,320C1280,320,1240,320,1200,320C1160,320,1120,320,1080,320C1040,320,1000,320,960,320C920,320,880,320,840,320C800,320,760,320,720,320C680,320,640,320,600,320C560,320,520,320,480,320C440,320,400,320,360,320C320,320,280,320,240,320C200,320,160,320,120,320C80,320,40,320,20,320L0,320Z"></path></svg>
 @endsection
