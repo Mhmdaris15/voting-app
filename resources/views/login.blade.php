@@ -5,9 +5,9 @@
 @section('content')
 
 <img class="absolute left-[10%] top-[40%] md:left-[40%]" src="{{ Vite::asset('/resources/images/png-assets/Tech Life - Blockchain.png') }}" alt="Blockchain">
-<div class="absolute w-full flex justify-around items-center">
-  <img src="{{ Vite::asset('/resources/images/png-assets/taxi-design.gif') }}" alt="Taxi Design">
-  <img src="{{ Vite::asset('/resources/images/png-assets/taxi-delivery-3.gif') }}" alt="Taxi Delivery">
+<div class="absolute w-full flex justify-around items-center top-72 gap-x-64 invisible md:visible">
+  <img class="w-60 xl:w-auto" src="{{ Vite::asset('/resources/images/png-assets/taxi-design.gif') }}" alt="Taxi Design">
+  <img class="w-60 xl:w-auto" src="{{ Vite::asset('/resources/images/png-assets/taxi-delivery-3.gif') }}" alt="Taxi Delivery">
 
 </div>
 @if (session('status'))
