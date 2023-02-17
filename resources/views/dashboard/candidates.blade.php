@@ -38,7 +38,7 @@
 @endforeach
 
 {{-- Box Card --}}
-<div class="flex flex-row gap-5 mx-auto">
+<div class="flex flex-row gap-5 mx-auto h-screen">
     
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-20">
         <div class="flex flex-col items-center px-4 py-10">

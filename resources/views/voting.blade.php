@@ -19,7 +19,7 @@
   ```
 -->
 {{-- <img class="absolute left-32 z-[1]" src="{{ Vite::asset('/resources/images/png-assets/Moneyverse - Crypto Galaxy.png') }}" alt="Crypto Galaxy"> --}}
-<div class="bg-gradient-to-r from-indigo-400 to-cyan-400 h-screen">
+<div class="bg-gradient-to-r from-indigo-400 to-cyan-400 h-screen pt-16">
   
     <div class="mx-auto max-w-2xl py-5 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       {{-- <h2 class="sr-only">Products</h2> --}}
@@ -102,7 +102,7 @@
             <div class="overflow-hidden rounded-lg bg-gray-200">
               <img src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="{{ $candidate->name }}" class="w-96 h-56 object-cover object-center group-hover:opacity-75">
             </div>
-            <h3 class="mt-4 text-sm text-gray-700">{{ $candidate->name }}</h3>
+            <h3 class="mt-4 text-xl font-bold text-gray-700">{{ $candidate->name }}</h3>
             {{-- <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->votes }}</p> --}}
             @if($user->role == 'admin')
               <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->users->count() }}</p>

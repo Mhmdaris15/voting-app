@@ -1,5 +1,5 @@
-<aside class="inline-block top-0 left-0 w-64 h-full" aria-label="Sidenav">
-    <div class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<aside class="inline-block top-0 left-0 w-64 h-auto" aria-label="Sidenav">
+    <div class="overflow-y-auto py-5 px-3 ml-3 h-full bg-white bg-opacity-50 rounded-md border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <ul class="space-y-2">
             <li>
                 <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

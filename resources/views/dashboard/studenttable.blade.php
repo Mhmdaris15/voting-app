@@ -48,7 +48,7 @@
         @endif
 </div>
 
-<div class="px-10 overflow-x-auto relative shadow-md sm:rounded-lg">
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
     @if(session()->has('success'))
     <div id="toast-danger" class="flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
         <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
@@ -68,16 +68,16 @@
 
     
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
+    <table class="w-full bg-transparent table-auto text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 bg-opacity-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr class="">
             {{-- <th scope="col" class="p-4">
                 <div class="flex items-center">
                     <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="checkbox-all-search" class="sr-only">checkbox</label>
                 </div>
             </th> --}}
-            <th scope="col" class="py-3 px-6">
+            <th scope="col" class="py-3 px-6 rounded-tl-xl">
                 ID
             </th>
             <th scope="col" class="py-3 px-6">
@@ -98,7 +98,7 @@
             <th scope="col" class="py-3 px-6">
                 Selected Candidate
             </th>
-            <th scope="col" class="py-3 px-6">
+            <th scope="col" class="py-3 px-6 rounded-tr-xl">
                 Actions
             </th>
         </tr>
@@ -106,7 +106,7 @@
         <tbody>
         @foreach($students as $student)
 
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <tr class="bg-white bg-opacity-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             {{-- <td class="p-4 w-4">
                 <div class="flex items-center">
                     <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
