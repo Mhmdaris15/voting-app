@@ -3,10 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="flex gap-5 bg-gradient-to-r from-indigo-400 to-cyan-400 h-auto w-auto pt-32">
+    <div class="flex h-auto w-auto pt-40">
         @include('partials.sidebar')
 
     {{-- Tabs --}}
+    <!-- 
         <div class="flex-1 inline-block border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                 <form action="{{ url('dashboard') }}" method="get">
@@ -46,23 +47,24 @@
                 </form>
                 
             </ul>
-            @if($tabChoosen == 'students')
-                @include('dashboard.studenttable', ['students' => $students])
-            @endif
-            @if($tabChoosen == 'statistics')
-                @include('dashboard.statistics', [
-                    'candidates' => $candidates,
-                    'candidate_names' => $candidate_names,
-                    'n_candidate_voters' => $n_candidate_voters,
-                    ])
-            @endif
-            @if($tabChoosen == 'candidates')
-                @include('dashboard.candidates', ['candidates' => $candidates])
-            @endif
-            @if($tabChoosen == 'generate-data')
-                @include('dashboard.generateData')
-            @endif
         </div>
+    -->
+        @if($tabChoosen == 'students')
+            @include('dashboard.studenttable', ['students' => $students])
+        @endif
+        @if($tabChoosen == 'statistics')
+            @include('dashboard.statistics', [
+                'candidates' => $candidates,
+                'candidate_names' => $candidate_names,
+                'n_candidate_voters' => $n_candidate_voters,
+                ])
+        @endif
+        @if($tabChoosen == 'candidates')
+            @include('dashboard.candidates', ['candidates' => $candidates])
+        @endif
+        @if($tabChoosen == 'generate-data')
+            @include('dashboard.generateData')
+        @endif
     </div>
 
 

@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ Vite::asset('resources/images/logo-nevtik.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="h-screen bg-gradient-to-r from-indigo-400 to-cyan-400">
     @include('partials.navbar')
     {{-- @if (Auth::check())
         @include('partials.sidebar')
