@@ -26,10 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-<<<<<<< HEAD
         Schema::defaultStringLength(191);
-=======
         // FacadesVite::macro('image', fn ($asset) => FacadesVite::asset($asset)->withQuery(['type' => 'image']));
->>>>>>> 7dad8a21b9abede1af02f70a2d0f835949d1ec7e
     }
 }

@@ -15,9 +15,15 @@
           <a href="{{ url('/') }}" class="group md:px-8 py-4 flex justify-center items-center transition-all ease-in-out hover:shadow-xl hover:bg-red-200 md:hover:before:border-white md:before:border-transparent md:before:border-2 md:before:absolute md:before:inset-0 md:before:translate-x-2 md:before:translate-y-2 relative">
             <span class="block text-white rounded md:p-0 group-hover:text-black" aria-current="page">Home</span>
           </a>
+          {{-- @if(Auth::user()->role == 'admin') --}}
           <a href="{{ url('dashboard') }}" class="group md:px-8 py-4 flex justify-center items-center transition-all ease-in-out hover:shadow-xl hover:bg-red-200 md:hover:before:border-white md:before:border-transparent md:before:border-2 md:before:absolute md:before:inset-0 md:before:translate-x-2 md:before:translate-y-2 relative">
             <span class="block text-white rounded md:p-0 group-hover:text-black" aria-current="page">Dashboard</span>
           </a>
+          {{-- @else
+          <a href="{{ url('dashboard') }}" class="group md:px-8 py-4 flex justify-center items-center transition-all ease-in-out hover:shadow-xl hover:bg-red-200 md:hover:before:border-white md:before:border-transparent md:before:border-2 md:before:absolute md:before:inset-0 md:before:translate-x-2 md:before:translate-y-2 relative">
+            <span class="block text-white rounded md:p-0 group-hover:text-black" aria-current="page">Dashboard</span>
+          </a> --}}
+          {{-- @endif --}}
           <a href="{{ url('voting') }}" class="group md:px-8 py-4 flex justify-center items-center transition-all ease-in-out hover:shadow-xl hover:bg-red-200 md:hover:before:border-white md:before:border-transparent md:before:border-2 md:before:absolute md:before:inset-0 md:before:translate-x-2 md:before:translate-y-2 relative">
             <span class="block text-white rounded md:p-0 group-hover:text-black" aria-current="page">Voting</span>
           </a>
