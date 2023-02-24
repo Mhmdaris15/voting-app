@@ -62,7 +62,23 @@ class UserController extends Controller
 
 
     public function postIndex(Request $request){
-       
+       if($request->has('add-voter')){
+              $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'class' => 'required',
+                'password' => 'required|min:6|confirmed',
+              ]);
+              $user = new User();
+              $user->name = $request->get('name');
+              $user->email = $request->get('email');
+              $user->nisn = $request->get('NISN');
+              $user->class = $request->get('class');
+              $user->role = $request->get('role');    
+              $user->password = Hash::make($request->get('password'));
+              $user->save();
+              return redirect()->route('dashboard')->with('success', 'Voter added successfully');
+       }
 
         if($request->has('tab-choosen')){
             

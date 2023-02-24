@@ -63,7 +63,7 @@
                         <input type="hidden" name="all_missions" id="all_missions">
                           <div>
                               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate Name</label>
-                              <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Joko Widodo" requiblue>
+                              <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Joko Widodo" required>
                           </div>
                           <div>
                             <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate Photo</label>
@@ -71,11 +71,11 @@
                           </div>
                           <div>
                             <label for="vision" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate's Vision</label>
-                            <input type="text" name="vision" id="vision" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Create a great event" requiblue>
+                            <input type="text" name="vision" id="vision" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Create a great event" required>
                           </div>
                           <div>
                             <label for="missions" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidate's Mission</label>
-                            {{-- <input type="text" name="mission" id="mission" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Create a great event" requiblue> --}}
+                            {{-- <input type="text" name="mission" id="mission" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Create a great event" required> --}}
                             <div id="mission_fields">
                               <button type="button" id="add_mission_field" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add Mission</button>
                               <input type="text" name="missions[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
