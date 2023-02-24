@@ -1,5 +1,7 @@
-<div class="w-[60em] h-auto m-auto my-10">
-    <canvas id="myChart"></canvas>
+<div class="w-full flex flex-col justify-start items-center h-auto m-auto my-10">
+    <h1 id="countdown" class="block text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-extrabold">10</h1>
+    <button type="button" id="chart-button" class="inline-block text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Start Countdown</button>
+    <canvas class="hidden" id="myChart"></canvas>
 </div>
 
 @push('scripts')
@@ -64,10 +66,39 @@
             },
             plugins: [ChartDataLabels],
         };
+        $(document).ready(function() {
+            // Hide Chart for the first time
+            $('#myChart').hide();
+            $('#chart-button').click(function() {
+                // if (config.type === 'doughnut') {
+                //     config.type = 'pie';
+                // } else {
+                //     config.type = 'doughnut';
+                // }
+                $('#countdown').text(10);
+                let count = parseInt($('#countdown').text());
+                
+                // Set Timeout for 10 seconds, and show the chart after 10 seconds
+
+                let timer = setInterval(function() {
+                    count--;
+                    $('#countdown').text(count);
+                    if (count == 0) {
+                        clearInterval(timer);
+                        $('#chart-button').hide(); // Hide Button
+                        $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
+                        // Change #myChart hidden to show
+                        $('#myChart').removeClass('hidden');
+                        $('#myChart').show(); // Show Chart
+                    }
+                }, 1000);
+
+            });
+            
+        });
         const myChart = new Chart(
             document.getElementById('myChart'),
             config,
-            
         );
     </script>
 @endpush

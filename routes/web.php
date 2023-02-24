@@ -31,7 +31,7 @@ Route::controller('login', LoginController::class)->group(function () {
 
 Route::controller('voting', [CandidateController::class, 'index'])->group(function () {
     Route::get('voting', [CandidateController::class, 'index'])->name('voting')->middleware('auth');
-    // Route::post('/candidate', [CandidateController::class, 'vote']);
+    Route::post('/voting', [CandidateController::class, 'store'])->middleware('auth');
     Route::post('/voting/{id}', [CandidateController::class, 'vote'])->middleware('auth');
 })->middleware('auth');
 

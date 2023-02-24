@@ -13,6 +13,8 @@ class Candidate extends Model
         'name',
         'photo',
         'votes',
+        'vision',
+        'missions'
     ];
     // Get the users for the Candidate
     public function users(){

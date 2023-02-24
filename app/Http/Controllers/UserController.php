@@ -15,29 +15,37 @@ class UserController extends Controller
 //    Show all users
     public function index(Request $request)
     {
-        if($request->has('filterBy') || $request->has('class')){
+        $users = User::with('candidate');
+
+        if($request->has('class')){
             // parse class from %20 to space
             $class_parsed = str_replace('%20', ' ', $request->get('class'));
             $users = User::with('candidate')->where('class', $class_parsed);
-            $users = $users->paginate(15);
-            $candidates = Candidate::all();
-            $classes = User::select('class')->distinct()->get();
-            $classes = $classes->map(function ($class){
-                return $class->class;
-            });
-            return view('dashboard', [
-                'students'=> $users,
-                'candidates'=> $candidates,
-                'tabChoosen' => 'students',
-                'classes' => $classes->sort()->values(),
-            ]);
+            // if ($request->has('voteStatus')){
+            //     $users = $request->get('votestatus') == '1' ? $users->whereNotNull('candidate_id') : $users->whereNull('candidate_id');
+            // }
+            // $users = $users->paginate(15);
+            // $candidates = Candidate::all();
+            // $classes = User::select('class')->distinct()->get();
+            // $classes = $classes->map(function ($class){
+            //     return $class->class;
+            // });
+            // return view('dashboard', [
+            //     'students'=> $users,
+            //     'candidates'=> $candidates,
+            //     'tabChoosen' => 'students',
+            //     'classes' => $classes->sort()->values(),
+            // ]);
+        }
+        if ($request->has('votestatus')){
+            $users = $request->get('votestatus') == '1' ? $users->whereNotNull('candidate_id') : $users->where('candidate_id', null);
         }
 //        $user = User::all();
 //        $candidate = $user->candidate()->paginate(7);
-        $users = User::with('candidate')->paginate(15);
         // $users = Cache::remember('users', 3600, function () {
         //     return User::with('candidate')->paginate(10);
         // });
+        $users = $users->paginate(15);
         $candidates = Candidate::all();
         $classes = User::select('class')->distinct()->get();
         $classes = $classes->map(function ($class){
@@ -54,7 +62,22 @@ class UserController extends Controller
 
 
     public function postIndex(Request $request){
-       
+       if($request->has('add-voter')){
+              $this->validate($request, [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'nisn' => 'required|string|max:255|unique:users',
+              ]);
+              $user = new User();
+              $user->name = $request->get('name');
+              $user->email = $request->get('email');
+              $user->nisn = $request->get('NISN');
+              $user->class = $request->get('class');
+              $user->role = $request->get('role');    
+              $user->password = Hash::make($request->get('password'));
+              $user->save();
+              return redirect()->route('dashboard')->with('success', 'Voter added successfully');
+       }
 
         if($request->has('tab-choosen')){
             
@@ -89,12 +112,13 @@ class UserController extends Controller
                     ]);
                 case 'candidates':
                     return view('dashboard', [
-                        'tabChoosen' => 'candidates'
+                        'tabChoosen' => 'candidates',
+                        'candidates' => collect($candidates)
                     ]);
                 case 'generate-data':
                     // Job Here
-                    // $job = new UserJob();
-                    // $this->dispatch($job);
+                    $job = new UserJob();
+                    $this->dispatch($job);
                     Cache::flush();
                     return view('dashboard', [
                         'tabChoosen' => 'generate-data'

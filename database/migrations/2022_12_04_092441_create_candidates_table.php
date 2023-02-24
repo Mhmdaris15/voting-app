@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name')->default('Aris Septanugroho');
             $table->string('photo')->nullable();
             $table->integer('votes')->default(0);
+            $table->string('vision')->nullable();
+            $table->json('missions')->nullable();
             $table->timestamps();
         });
     }
