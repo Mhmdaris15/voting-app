@@ -64,10 +64,9 @@ class UserController extends Controller
     public function postIndex(Request $request){
        if($request->has('add-voter')){
               $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'class' => 'required',
-                'password' => 'required|min:6|confirmed',
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'nisn' => 'required|string|max:255|unique:users',
               ]);
               $user = new User();
               $user->name = $request->get('name');
