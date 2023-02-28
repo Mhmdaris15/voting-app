@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\UserJob;
 use App\Models\Candidate;
+use App\Models\Time;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -66,7 +67,8 @@ class UserController extends Controller
               $this->validate($request, [
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'nisn' => 'required|string|max:255|unique:users',
+                'NISN' => 'required|string|max:255|unique:users',
+                'password'=> 'required|string|min:6',
               ]);
               $user = new User();
               $user->name = $request->get('name');
@@ -74,7 +76,7 @@ class UserController extends Controller
               $user->nisn = $request->get('NISN');
               $user->class = $request->get('class');
               $user->role = $request->get('role');    
-              $user->password = Hash::make($request->get('password'));
+              $user->password = $request->get('password');
               $user->save();
               return redirect()->route('dashboard')->with('success', 'Voter added successfully');
        }
@@ -101,7 +103,14 @@ class UserController extends Controller
                         'classes' => $classes->sort()->values(),
                     ]);
                 case 'statistics':
+                    if ($request->has('showing-time')){
+                        $newTime = new Time();
+                        $newTime->deadline = $request->get('showing-time');
+                        $newTime->save();
+                    }
+                    $time = Time::first();
                     return view('dashboard', [
+                        'time' => $time,
                         'candidates' => $candidates,
                         'candidate_names' => $candidates->pluck('name')->push('Not Voters'),
                         'n_candidate_voters' => $candidates->map(function ($candidate){

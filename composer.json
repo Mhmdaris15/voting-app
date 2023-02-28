@@ -49,6 +49,14 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "migrate-all-data": [
+            "@php artisan migrate:fresh",
+            "@php artisan db:seed --class=CandidateSeeder",
+            "@php artisan db:seed --class=UserSeeder"
+        ],
+        "reset-time-table" : [
+            "@php artisan migrate:refresh --path=/database/migrations/2023_02_27_011620_create_times_table.php"
         ]
     },
     "extra": {

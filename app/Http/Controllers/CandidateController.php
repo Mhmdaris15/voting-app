@@ -28,6 +28,7 @@ class CandidateController extends Controller
         // $candidate->votes = $candidate->votes + 1;
         // $candidate->save();
 
+
         auth()->user()->candidate_id = $id;
 
         auth()->user()->save();

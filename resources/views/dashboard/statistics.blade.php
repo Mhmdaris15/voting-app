@@ -1,7 +1,19 @@
 <div class="w-full flex flex-col justify-start items-center h-auto m-auto my-10">
+    <div class="countdown-timer flex gap-x-10">
+        <p id="days" class="w-32 h-32 text-3xl rounded-lg bg-red-400 flex justify-center items-center">10 Days</p>
+        <p id="hours" class="w-32 h-32 text-3xl rounded-lg bg-red-400 flex justify-center items-center">5 Hours</p>
+        <p id="minutes" class="w-32 h-32 text-3xl rounded-lg bg-red-400 flex justify-center items-center">12 Minutes</p>
+        <p id="seconds" class="w-32 h-32 text-3xl rounded-lg bg-red-400 flex justify-center items-center">0 Seconds</p>
+    </div>
     <h1 id="countdown" class="block text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-extrabold">10</h1>
     <button type="button" id="chart-button" class="inline-block text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Start Countdown</button>
     <canvas class="hidden" id="myChart"></canvas>
+    <form action="{{ url('dashboard') }}" method="post">
+        @csrf
+        <input type="hidden" name="tab-choosen" value="statistics">
+        <input type="date" name="showing-time" id="showing-time">
+        <button type="submit" class="inline-block text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-800">Submit</button>    
+    </form>
 </div>
 
 @push('scripts')
@@ -10,8 +22,16 @@
     <script src="{{ asset('js/chartjs-plugin-datalabels.js') }}"></script>
 
     <script type="text/javascript">
+     // we ned ending date and current date and we also need to subtract.
+        
+
         // import ChartDataLabels from 'chartjs-plugin-datalabels';
         // import {Chart} from 'chart.js';
+        
+        let showingTime = @json($time); // declare showingTime variable that contains time variable with string data type from php
+        console.log(showingTime['deadline']);
+
+        let showingTime = new Date(showingTime['deadline']);
 
         let candidate_names = @json($candidate_names);
         // generate n_candidate_voters random colors
@@ -67,6 +87,41 @@
             plugins: [ChartDataLabels],
         };
         $(document).ready(function() {
+
+            function formatTime(time) {
+                return time < 10 ? `0${time}` : time;
+            }
+
+            let daysEl = $('#days');
+            let hoursEl = $('#hours');
+            let minsEl = $('#minutes');
+            let secondsEl = $('#seconds');
+
+            let date = showingTime;
+
+            function countdown() {
+                let newDate = new Date(date);
+                let currentDate = new Date();
+
+                let difference = Math.floor(newDate - currentDate);
+
+                let days = Math.floor(difference / (1000 * 3600 * 24));
+                let hours = Math.floor(difference / (1000 * 3600)) % 24;
+                let mins = Math.floor(difference / (1000 * 60)) % 60;
+                let seconds = Math.floor(difference / 1000) % 60;
+
+                console.log(days, hours, mins, seconds);
+
+                daysEl.text(formatTime(days) + ' D');
+                hoursEl.text(formatTime(hours) + ' H');
+                minsEl.text(formatTime(mins) + ' M');
+                secondsEl.text(formatTime(seconds) + ' S');
+            }
+
+            countdown();
+            setInterval(countdown, 1000);
+
+
             // Hide Chart for the first time
             $('#myChart').hide();
             $('#chart-button').click(function() {
@@ -94,8 +149,8 @@
                 }, 1000);
 
             });
-            
         });
+        
         const myChart = new Chart(
             document.getElementById('myChart'),
             config,

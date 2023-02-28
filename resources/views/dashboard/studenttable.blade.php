@@ -207,8 +207,8 @@
                     {{ $student->class }}
                 </td>
                 <td class="py-4 pl-4 {{ empty($student->candidate_id)? 'text-red-600' : 'text-green-700' }}">
-                    {{ $student->candidate->name ?? 'Not Selected' }}
-                    {{-- {{ empty($student->candidate_id)? 'Not Selected' : 'Selected' }} --}}
+                    {{-- {{ $student->candidate->name ?? 'Not Selected' }} --}}
+                    {{ empty($student->candidate_id)? 'Not Selected' : 'Selected' }}
                 </td>
                 <td class="py-4 pl-4 flex">
                     {{-- <form action="{{ url('dashboard') }}/{{ $student->id }}" method="post"> --}}

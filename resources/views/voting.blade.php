@@ -184,9 +184,11 @@
 
         <!-- More products... -->
       </div>
+      @if($user->role == 'admin')
       {{-- Statistics --}}
       <h3 class="text-3xl text-gray-50 font-bold mt-4 hover:text-blue-700 cursor-pointer">Live Statistics</h3>
       <p class="text-gray-50"> Who haven't voted yet : {{ $n_not_voted }} </p>
+      @endif
 
       {{-- Card --}}
 
