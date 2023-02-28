@@ -8,6 +8,11 @@
             <!-- Dropdown Kelas -->
             <div id="dropdownKelas" class="z-10 hidden bg-white rounded shadow w-36 dark:bg-gray-700">
                 <ul class="h-60 py-1 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownKelasButton">
+                    <li>
+                        <form method="GET" action="{{ url('dashboard') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            <a href="{{ url('dashboard') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All Users</a>
+                        </form>
+                    </li>
                     @foreach ($classes as $class)
                     <li>
                         {{-- action will be current url + class=$class --}}

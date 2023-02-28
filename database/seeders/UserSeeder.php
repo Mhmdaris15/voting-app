@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'role' => 'admin',
             'class' => 'XII SIJA 1',
             'NISN' => fake()->unique()->numberBetween(1000000000, 9999999999),
-            'password' => '123456',
+            'password' => '5tgb6yhn',
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'class' => $data[2],
                 'NISN' => $data[3],
                 'password' => $data[5],
-                'candidate_id' => random_int(1, Candidate::count())
+                // 'candidate_id' => random_int(1, Candidate::count())
             ]);
         }
         $open2 = fopen(storage_path('app\teachers.csv'), "r");
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
                 'class' => $data[2],
                 'NISN' => $data[3],
                 'password' => $data[5],
-                'candidate_id' => random_int(1, Candidate::count())
+                // 'candidate_id' => random_int(1, Candidate::count())
             ]);
         }
     }

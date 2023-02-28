@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('times', function (Blueprint $table) {
             $table->id();
             $table->date('deadline')->default('2023-03-15');
+            $table->time('started')->default('00:00:00');
             $table->timestamps();
         });
     }

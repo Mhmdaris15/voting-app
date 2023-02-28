@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+     
 //    Show all users
     public function index(Request $request)
     {
@@ -103,12 +105,14 @@ class UserController extends Controller
                         'classes' => $classes->sort()->values(),
                     ]);
                 case 'statistics':
-                    if ($request->has('showing-time')){
+                    if ($request->has('showing-time') && $request->has('detail-time')){
                         $newTime = new Time();
                         $newTime->deadline = $request->get('showing-time');
+                        $newTime->started = $request->get('detail-time');
                         $newTime->save();
                     }
-                    $time = Time::first();
+                    // Get the latest time
+                    $time = Time::latest()->first() ?? Time::createNewTime('15 Jan 2025', '15:00:00');
                     return view('dashboard', [
                         'time' => $time,
                         'candidates' => $candidates,

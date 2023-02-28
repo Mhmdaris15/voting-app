@@ -11,5 +11,14 @@ class Time extends Model
 
     protected $fillable = [
         'deadline',
+        'started',
     ];
+
+    public static function createNewTime(string $deadline, string $started)
+    {
+        $time = new Time();
+        $time->deadline = $deadline;
+        $time->started = $started;
+        return $time;
+    }
 }
