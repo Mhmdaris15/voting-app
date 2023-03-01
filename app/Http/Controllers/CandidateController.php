@@ -27,12 +27,14 @@ class CandidateController extends Controller
         // $candidate = Candidate::find($id);
         // $candidate->votes = $candidate->votes + 1;
         // $candidate->save();
+        
         if(auth()->user()->candidate_id != null){
             return redirect()->route('voting')->with('error', 'Anda sudah Voting!!');
         } else {
             auth()->user()->candidate_id = $id;
 
             auth()->user()->save();
+
             Cache::flush();
 
             // Auto Logout after voted
