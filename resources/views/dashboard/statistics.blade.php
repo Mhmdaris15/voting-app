@@ -11,15 +11,15 @@
         
         <div class="absolute top-1 font-normal text-xs">End Time : {{ $time['deadline'] }} {{ $time['started'] }}</div>
 
-        <div>The voting will be end in </div>
+        <div class="text-2xl text-center">The voting will be end in </div>
 
-        <p id="days" class="text-3xl text-center">10 Days</p>
-        <p id="hours" class="text-3xl text-center">5 Hours</p>
-        <p id="minutes" class="text-3xl text-center">12 Minutes</p>
-        <p id="seconds" class="text-3xl text-center text-red-500">0 Seconds</p>
+        <p id="days" class="text-2xl text-center">10 Days</p>
+        <p id="hours" class="text-2xl text-center">5 Hours</p>
+        <p id="minutes" class="text-2xl text-center">12 Minutes</p>
+        <p id="seconds" class="text-2xl text-center text-red-500">0 Seconds</p>
     </div>
-    <h1 id="countdown" class="block text-6xl mt-5 text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-extrabold">10</h1>
-    <button type="button" id="chart-button" class="inline-block text-blue-700 bg-blue-200 transition-all ease-in-out hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:bg-slate-200 disabled:hover:bg-slate-200 disabled:text-blue-400" disabled>Start Countdown</button>
+    <h1 id="countdown" class="block text-6xl mt-5 text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-extrabold">Statistics will appear after voting time ends</h1>
+    {{-- <button type="button" id="chart-button" class="inline-block text-blue-700 bg-blue-200 transition-all ease-in-out hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:bg-slate-200 disabled:hover:bg-slate-200 disabled:text-blue-400" disabled>Start Countdown</button> --}}
     <canvas class="hidden" id="myChart"></canvas>
     
 </div>
@@ -133,39 +133,63 @@
                 minsEl.html(formatTime(mins) + " <p class='text-xs'>Minutes</p>");
                 secondsEl.html(formatTime(seconds) + " <p class='text-xs text-gray-50'>Seconds</p>");
 
+                show();
 
             }
 
-            countdown();
-            setInterval(countdown, 1000);
+            function show() {
+                // var count = $('#seconds').val();
+                // count--;
+                let da = (daysEl.text());
+                let ho = (hoursEl.text());
+                let min = (minsEl.text());
+                let sec = (secondsEl.text());
 
-            // Hide Chart for the first time
-            $('#myChart').hide();
-            $('#chart-button').click(function() {
-                // if (config.type === 'doughnut') {
-                //     config.type = 'pie';
-                // } else {
-                //     config.type = 'doughnut';
-                // }
-                $('#countdown').text(10);
-                let count = parseInt($('#countdown').text());
-                
-                // Set Timeout for 10 seconds, and show the chart after 10 seconds
-
-                let timer = setInterval(function() {
-                    count--;
-                    $('#countdown').text(count);
-                    if (count == 0) {
-                        clearInterval(timer);
-                        $('#chart-button').hide(); // Hide Button
+                $('#days').text(da);
+                $('#hours').text(ho);
+                $('#minutes').text(min);
+                $('#seconds').text(sec);
+                if (min == "00 Minutes" && sec == "00 Seconds") {
+                        // clearInterval(timer);
+                        // $('#chart-button').hide(); // Hide Button
                         $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
                         // Change #myChart hidden to show
                         $('#myChart').removeClass('hidden');
                         $('#myChart').show(); // Show Chart
                     }
-                }, 1000);
+            }
 
-            });
+            $('#myChart').hide();
+            countdown();
+            setInterval(countdown, 1000);
+
+            // // Hide Chart for the first time
+            // $('#myChart').hide();
+            // $('#chart-button').click(function() {
+            //     // if (config.type === 'doughnut') {
+            //     //     config.type = 'pie';
+            //     // } else {
+            //     //     config.type = 'doughnut';
+            //     // }
+            //     $('#countdown').text(10);
+            //     let count = parseInt($('#countdown').text());
+                
+            //     // Set Timeout for 10 seconds, and show the chart after 10 seconds
+
+            //     let timer = setInterval(function() {
+            //         count--;
+            //         $('#countdown').text(count);
+            //         if (count == 0) {
+            //             clearInterval(timer);
+            //             $('#chart-button').hide(); // Hide Button
+            //             $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
+            //             // Change #myChart hidden to show
+            //             $('#myChart').removeClass('hidden');
+            //             $('#myChart').show(); // Show Chart
+            //         }
+            //     }, 1000);
+
+            // });
         });
         
         const myChart = new Chart(
