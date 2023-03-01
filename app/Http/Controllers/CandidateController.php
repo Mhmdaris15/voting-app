@@ -38,7 +38,7 @@ class CandidateController extends Controller
             // Auto Logout after voted
             auth()->logout();
 
-            return redirect()->route('voting');
+            return redirect()->route('voting')->with('success', 'Voted Succesfuly');;
         }
 
         
