@@ -63,4 +63,12 @@ class CandidateController extends Controller
         $photo->move(base_path('/resources/images'), $filename);
         return redirect()->route('voting')->with('success', 'Candidate has been added');
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $candidate = Candidate::find($id);
+        $candidate->delete();
+        return redirect()->route('voting')->with('success', 'Candidate has been deleted');
+    }
+
 }

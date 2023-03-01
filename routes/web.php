@@ -33,6 +33,7 @@ Route::controller('voting', [CandidateController::class, 'index'])->group(functi
     Route::get('voting', [CandidateController::class, 'index'])->name('voting')->middleware('auth');
     Route::post('/voting', [CandidateController::class, 'store'])->middleware('auth');
     Route::post('/voting/{id}', [CandidateController::class, 'vote'])->middleware('auth');
+    Route::delete('/voting/{id}', [CandidateController::class, 'destroy'])->middleware('auth');
 })->middleware('auth');
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
