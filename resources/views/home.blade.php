@@ -8,7 +8,7 @@
             <a href="https://nevtik.org/" target="_blank" class="inline-flex justify-between items-center py-1 px-1 pr-4 mx-3 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" role="alert">
                 <span class="text-xs bg-red-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <a href="https://nevtik.org/" class="text-sm font-medium">We are NEVTIK! See what's our work and project creation</a>
             </a>
-            <img class="mx-auto h-36" src="{{ Vite::asset('/resources/images/logo-nevtik.png') }}" alt="Logo NEVTIK">
+            <img class="mx-auto h-36" src="{{ Vite::asset('resources/images/logo-nevtik.png') }}" alt="Logo NEVTIK">
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">We work with high dedication and professionally</h1>
             <p class="mb-8 text-lg font-normal text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at NEVTIK we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
