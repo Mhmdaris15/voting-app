@@ -7,7 +7,7 @@
   
         <button type="submit" class="inline-block text-red-700 hover:text-white border border-red-700 bg-red-200 transition-all ease-in-out hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-800">Set End Time</button>    
     </form>
-    <div class="relative countdown-timer flex gap-x-10 justify-evenly items-center w-1/2 h-36 text-gray-50 font-extrabold bg-gradient-to-bl from-blue-700 via-blue-800 to-gray-900 rounded-3xl">
+    <div class="relative countdown-timer flex gap-x-10 justify-evenly items-center w-2/3 h-36 text-gray-50 font-extrabold bg-gradient-to-bl from-blue-700 via-blue-800 to-gray-900 rounded-3xl">
         
         <div class="absolute top-1 font-normal text-xs">End Time : {{ $time['deadline'] }} {{ $time['started'] }}</div>
 
@@ -18,7 +18,7 @@
         <p id="minutes" class="text-2xl text-center">12 Minutes</p>
         <p id="seconds" class="text-2xl text-center text-red-500">0 Seconds</p>
     </div>
-    <h1 id="countdown" class="block text-6xl mt-5 text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-extrabold">Statistics will appear after voting time ends</h1>
+    <h1 id="countdown" class="block text-3xl mt-5 text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-bold">Statistics will appear after voting time ends</h1>
     {{-- <button type="button" id="chart-button" class="inline-block text-blue-700 bg-blue-200 transition-all ease-in-out hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:bg-slate-200 disabled:hover:bg-slate-200 disabled:text-blue-400" disabled>Start Countdown</button> --}}
     <canvas class="hidden" id="myChart"></canvas>
     

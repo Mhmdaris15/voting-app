@@ -109,13 +109,13 @@
             @if($user->role == 'admin')
               <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->users->count() }}</p>
               <p>Percentage : {{ $candidate->users->count() / $n_users * 100}} %</p>
-              
-              
             @endif
           </div>
           <div class="absolute bottom-2 right-4 flex justify-center items-center gap-x-2">
             {{-- <div><img src="https://img.icons8.com/sf-ultralight/25/null/pencil.png"/></div> --}}
+            @if($user->role == 'admin')
             <button type="button" class="bg-red-500 py-1 px-4 rounded-md shadow-sm shadow-gray-600 transition-all ease-in-out hover:bg-red-200" data-modal-toggle="delete-modal-{{ $candidate->id }}"><img src="https://img.icons8.com/material-outlined/24/null/delete-trash.png"/></button>
+            @endif
           </div>
           
           <!-- Main modal -->

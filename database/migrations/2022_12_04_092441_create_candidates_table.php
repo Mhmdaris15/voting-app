@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->default('Aris Septanugroho');
+            $table->string('name')->default('Prabowo Subianto');
             $table->string('photo')->nullable();
             $table->integer('votes')->default(0);
             $table->string('vision')->nullable();
