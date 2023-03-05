@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BuildAssets;
 use Illuminate\Http\Request;
 use App\Models\Candidate;
 use App\Models\User;
@@ -61,6 +62,7 @@ class CandidateController extends Controller
             "missions" => json_encode(explode(',', json_encode($request->all_missions))),
         ]);
         $photo->move(base_path('/resources/images'), $filename);
+        event(new BuildAssets());
         return redirect()->route('voting')->with('success', 'Candidate has been added');
     }
 
