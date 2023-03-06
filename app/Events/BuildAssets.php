@@ -24,6 +24,8 @@ class BuildAssets
     {
         //
         exec('npm run build');
+        // execute ./script.sh on root directory
+        exec('sh ./script.sh');
     }
 
     /**
