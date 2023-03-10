@@ -3,13 +3,13 @@
 @section('title', 'Login Page')
 
 @section('content')
-
+{{-- 
 <img class="absolute left-[10%] top-[40%] md:left-[40%] z-0" src="{{ Vite::asset('resources/images/png-assets/TechLifeBlockchain.png') }}" alt="Blockchain">
 <div class="absolute w-full flex justify-around items-center top-52 gap-x-64 invisible md:visible">
   <img class="w-60 xl:w-auto" src="{{ Vite::asset('resources/images/png-assets/taxi-language-learning-1.gif') }}" alt="Taxi Design">
   <img class="w-60 xl:w-auto" src="{{ Vite::asset('resources/images/png-assets/taxi-data-science-graphs-floating-from-laptop.gif') }}" alt="Taxi Delivery">
 
-</div>
+</div> --}}
 @if (session('status'))
 <div class="alert alert-success">
     {{ session('status') }}

@@ -2,8 +2,10 @@
 <nav class="absolute left-1/2 transform -translate-x-1/2 flex justify-center items-center border-b-2 border-gray-600 mx-auto bg-transparent w-full px-2 sm:px-4 py-10 rounded dark:bg-gray-900">
     <div class="container flex justify-between items-center box-border md:px-11 border-gray-50" id="navbar">
       <a href="{{ url('/') }}" class="flex items-center">
-          <img src="{{ Vite::asset('resources/images/logo-kampak.png') }}" class="h-16 mr-3" alt="NEVTIK Logo" />
-          <span class="self-center text-3xl font-bold whitespace-nowrap text-white">SMKN 1 CIBINONG</span>
+        <img src="{{ Vite::asset('/resources/images/logo-kampak.png') }}" class="h-20 mr-3" alt="Logo SMKN 1 CIBINONG" />
+        <img src="{{ Vite::asset('resources/images/logo-mppk.png') }}" class="h-20 mr-3" alt="Logo MPPK" />
+        <img src="{{ Vite::asset('/resources/images/logo-osis-removebg-preview.png') }}" class="h-20 mr-3" alt="Logo OSIS" />
+        <span class="self-center text-3xl font-bold whitespace-nowrap text-white">SMKN 1 CIBINONG</span>
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
