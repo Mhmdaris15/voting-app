@@ -48,7 +48,8 @@ class LoginController extends Controller
         $user = Auth::getProvider()->retrieveByCredentials($credentials); // Get the user
 
         Auth::login($user); // Log the user in
-        $request->session()->put('NISN', $request->NISN);
+        $request->session()->put('NISN', $user->NISN);
+        $request->session()->put('role', $user->role); 
 
         return redirect()->intended('voting');
     }

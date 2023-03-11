@@ -4,12 +4,21 @@
 
 @section('content')
     <section class="md:pt-24 pt-32  bg-gradient-to-r from-indigo-400 to-cyan-400 h-auto dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center md:py-20 lg:py-20 lg:px-12">
+            
+            <div class="h-[40vh] flex flex-col items-center">
+                
+                <img src="{{ Vite::asset('resources/images/logo-mppk.png') }}" class="h-28" alt="Logo MPPK">
+                <h2 class="text-4xl font-bold dark:text-white">PEMILU RAYA 2023</h2>
+                <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400">GOLDEN VOICE FOR GOLDEN LEADER</span></h1>
+
+            </div>
+            
             <a href="https://nevtik.org/" target="_blank" class="inline-flex justify-between items-center py-1 px-1 pr-4 mx-3 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" role="alert">
                 <span class="text-xs bg-red-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <a href="https://nevtik.org/" class="text-sm font-medium">We are NEVTIK! See what's our work and project creation</a>
             </a>
             <img class="mx-auto h-36" src="{{ Vite::asset('resources/images/logo-nevtik.png') }}" alt="Logo NEVTIK">
-            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">We work with high dedication and professionally</h1>
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-5xl dark:text-white">We work with high dedication and professionally</h1>
             <p class="mb-8 text-lg font-normal text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at NEVTIK we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                 <a href="https://nevtik.org/" target="_blank" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
