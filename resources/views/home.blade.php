@@ -6,10 +6,11 @@
     <section class="md:pt-24 pt-32  bg-gradient-to-r from-indigo-400 to-cyan-400 h-auto dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center md:py-20 lg:py-20 lg:px-12">
             
-            <div class="h-[40vh] flex flex-col items-center">
+            <div class="h-[45vh] flex flex-col items-center gap-y-3">
                 
                 <img src="{{ Vite::asset('resources/images/logo-mppk.png') }}" class="h-28" alt="Logo MPPK">
                 <h2 class="text-4xl font-bold dark:text-white">PEMILU RAYA 2023</h2>
+                <h3>Dengan Tema</h3>
                 <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400">GOLDEN VOICE FOR GOLDEN LEADER</span></h1>
 
             </div>

@@ -5,7 +5,10 @@
         <img src="{{ Vite::asset('resources/images/logo-kampak.png') }}" class="h-20 mr-3" alt="Logo SMKN 1 CIBINONG" />
         <img src="{{ Vite::asset('resources/images/logo-mppk.png') }}" class="h-20 mr-3" alt="Logo MPPK" />
         <img src="{{ Vite::asset('resources/images/logo-osis-removebg-preview.png') }}" class="h-20 mr-3" alt="Logo OSIS" />
-        <span class="self-center text-3xl font-bold whitespace-nowrap hidden lg:block text-white">SMKN 1 CIBINONG</span>
+        <div>
+          <span class="self-center text-3xl font-bold whitespace-nowrap hidden lg:block text-white">PEMIRA 2023</span>
+          <span class="self-center text-3xl font-bold whitespace-nowrap hidden lg:block text-white">SMKN 1 CIBINONG</span>
+        </div>
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex z-10 items-center p-2 ml-3 mr-10 md:mr-0 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
