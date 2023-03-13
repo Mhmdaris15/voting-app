@@ -106,10 +106,10 @@
             </div>
             <h3 class="mt-4 text-xl font-bold text-gray-700">{{ $candidate->name }}</h3>
             {{-- <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->votes }}</p> --}}
-            @if($user->role == 'admin')
+            {{-- @if($user->role == 'admin')
               <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->users->count() }}</p>
               <p>Percentage : {{ $candidate->users->count() / $n_users * 100}} %</p>
-            @endif
+            @endif --}}
           </div>
           <div class="absolute bottom-2 right-4 flex justify-center items-center gap-x-2">
             {{-- <div><img src="https://img.icons8.com/sf-ultralight/25/null/pencil.png"/></div> --}}
