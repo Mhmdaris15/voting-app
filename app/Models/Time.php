@@ -12,6 +12,7 @@ class Time extends Model
     protected $fillable = [
         'deadline',
         'started',
+        'is_clicked'
     ];
 
     public static function createNewTime(string $deadline, string $started)

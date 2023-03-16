@@ -10,17 +10,21 @@
     <div class="relative countdown-timer flex gap-x-10 justify-evenly items-center w-2/3 h-36 text-gray-50 font-extrabold bg-gradient-to-bl from-blue-700 via-blue-800 to-gray-900 rounded-3xl">
         
         <div class="absolute top-1 font-normal text-xs">End Time : {{ $time['deadline'] }} {{ $time['started'] }}</div>
-
         <div class="text-2xl text-center">The voting will be end in </div>
-
         <p id="days" class="text-2xl text-center">10 Days</p>
         <p id="hours" class="text-2xl text-center">5 Hours</p>
         <p id="minutes" class="text-2xl text-center">12 Minutes</p>
         <p id="seconds" class="text-2xl text-center text-red-500">0 Seconds</p>
     </div>
     <h1 id="countdown" class="block text-3xl mt-5 text-center text-transparent bg-clip-text bg-gradient-to-r to-red-600 from-orange-400 font-bold">Statistics will appear after voting time ends</h1>
-    {{-- <button type="button" id="chart-button" class="inline-block text-blue-700 bg-blue-200 transition-all ease-in-out hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:bg-slate-200 disabled:hover:bg-slate-200 disabled:text-blue-400" disabled>Start Countdown</button> --}}
-    <canvas class="hidden" id="myChart"></canvas>
+    <button type="button" id="chart-button" class="inline-block text-blue-700 bg-blue-200 transition-all ease-in-out hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:bg-slate-200 disabled:hover:bg-slate-200 disabled:text-blue-400" disabled>Start Countdown</button>
+    <form action="{{ url('dashboard') }}/{{ $time['id'] }}" method="post">
+        @method('PUT')
+        @csrf
+        <input type="hidden" name="time_id" value="{{ $time['id'] }}">
+        <button type="submit">IS CLICKED TRUE</button>
+    </form>
+    <canvas class="" id="myChart"></canvas>
     
 </div>
 
@@ -39,7 +43,9 @@
         
         let showingTime = @json($time); // declare showingTime variable that contains time variable with string data type from php
         console.log(showingTime);
-        // console.log(showingTime['deadline']);
+        // convert is_clicked to boolean
+        let isClicked = (showingTime['is_clicked'] == 1) ? true : false;
+        console.log(isClicked);
 
         showingTime = new Date(showingTime['deadline'] + ' ' + showingTime['started']);
         console.log(showingTime);
@@ -107,6 +113,7 @@
             let hoursEl = $('#hours');
             let minsEl = $('#minutes');
             let secondsEl = $('#seconds');
+            let intervalCountdown = setInterval(countdown, 1000);
 
             let date = showingTime;
 
@@ -116,9 +123,10 @@
 
                 let difference = Math.floor(newDate - currentDate);
 
-                if (difference < 0) {
+                if (difference <= 0) {
                     difference = 0;
                     $('#chart-button').removeAttr('disabled');
+                    $('#chart-button').removeClass('disabled');
                 }
 
                 let days = Math.floor(difference / (1000 * 3600 * 24));
@@ -152,44 +160,59 @@
                 if (min == "00 Minutes" && sec == "00 Seconds") {
                         // clearInterval(timer);
                         // $('#chart-button').hide(); // Hide Button
+                        // $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
+                        // Change #myChart hidden to show
+                        clearInterval(intervalCountdown);
+                        $('#chart-button').removeAttr('disabled');
+
+                        // $('#myChart').removeClass('hidden');
+                        // $('#myChart').show(); // Show Chart
+                    }
+            }
+
+            countdown();
+
+            // // Hide Chart for the first time when the page is loaded and show it after 10 seconds
+            console.log(showingTime > new Date());
+            if (isClicked){
+                $('#myChart').show();
+            } else {
+                $('#myChart').hide();
+            }
+            // if (showingTime > new Date()) {
+            //     $('#chart-button').attr('disabled', 'disabled');
+            //     $('#chart-button').addClass('disabled');
+            //     $('#myChart').hide();
+            // } else {
+            //     $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
+            //     $('#myChart').show();
+            // }
+
+            $('#chart-button').click(function() {
+                // if (config.type === 'doughnut') {
+                //     config.type = 'pie';
+                // } else {
+                //     config.type = 'doughnut';
+                // }
+                $('#countdown').text(10);
+                let count = parseInt($('#countdown').text());
+                
+                // Set Timeout for 10 seconds, and show the chart after 10 seconds
+
+                let timer = setInterval(function() {
+                    count--;
+                    $('#countdown').text(count);
+                    if (count == 0) {
+                        clearInterval(timer);
+                        $('#chart-button').hide(); // Hide Button
                         $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
                         // Change #myChart hidden to show
                         $('#myChart').removeClass('hidden');
                         $('#myChart').show(); // Show Chart
                     }
-            }
+                }, 1000);
 
-            $('#myChart').hide();
-            countdown();
-            setInterval(countdown, 1000);
-
-            // // Hide Chart for the first time
-            // $('#myChart').hide();
-            // $('#chart-button').click(function() {
-            //     // if (config.type === 'doughnut') {
-            //     //     config.type = 'pie';
-            //     // } else {
-            //     //     config.type = 'doughnut';
-            //     // }
-            //     $('#countdown').text(10);
-            //     let count = parseInt($('#countdown').text());
-                
-            //     // Set Timeout for 10 seconds, and show the chart after 10 seconds
-
-            //     let timer = setInterval(function() {
-            //         count--;
-            //         $('#countdown').text(count);
-            //         if (count == 0) {
-            //             clearInterval(timer);
-            //             $('#chart-button').hide(); // Hide Button
-            //             $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
-            //             // Change #myChart hidden to show
-            //             $('#myChart').removeClass('hidden');
-            //             $('#myChart').show(); // Show Chart
-            //         }
-            //     }, 1000);
-
-            // });
+            });
         });
         
         const myChart = new Chart(

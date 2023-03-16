@@ -148,6 +148,16 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        if ($request->has('time_id')){
+            $time = Time::find($request->get('time_id'));
+            $time->is_clicked = true;
+            $time->save();
+            // route to dashboard with post method
+
+            return redirect()->route('dashboard')->with('success', 'Time updated successfully');
+        }
+
 //       validate data
         $request->validate([
             'nisn'=> 'required|numeric',

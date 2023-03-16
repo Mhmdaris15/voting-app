@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('deadline')->default('2023-03-15');
             $table->time('started')->default('00:00:00');
+            $table->boolean('is_clicked')->default(false);
             $table->timestamps();
         });
     }
