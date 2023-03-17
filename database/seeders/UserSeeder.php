@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'class' => $data[2],
                 'NISN' => $data[3],
                 'password' => $data[5],
-                'candidate_id' => random_int(1, Candidate::count())
+                // 'candidate_id' => random_int(1, Candidate::count())
             ]);
         }
         $open2 = fopen(storage_path('app\teachers.csv'), "r");
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
                 'class' => $data[2],
                 'NISN' => $data[3],
                 'password' => $data[5],
-                'candidate_id' => random_int(1, Candidate::count())
+                // 'candidate_id' => random_int(1, Candidate::count())
             ]);
         }
     }
