@@ -19,7 +19,7 @@
       @if(session('role') == 'user' && url()->current() == url('voting'))
         <div></div>
       @else
-      <div class="absolute mt-48 hidden w-full md:static md:m-0 md:block md:w-auto px-9" id="navbar-default">
+      <div class="absolute mt-48 hidden w-full md:static md:m-0 md:block md:w-auto px-9 z-[100]" id="navbar-default">
         <ul class="bg-gray-700 bg-opacity-80 md:bg-inherit flex flex-col mt-4 border sm:gap-x-2 md:gap-x-4 lg:gap-x-5 border-gray-100 rounded-lg md:flex-row md:mt-0 md:text-sm md:font-medium md:border-0">
           <a href="{{ url('/') }}" class="group md:px-8 py-4 flex justify-center items-center transition-all ease-in-out hover:shadow-xl hover:bg-red-200 md:hover:before:border-white md:before:border-transparent md:before:border-2 md:before:absolute md:before:inset-0 md:before:translate-x-2 md:before:translate-y-2 relative">
             <span class="block text-white rounded md:p-0 group-hover:text-black" aria-current="page">Home</span>

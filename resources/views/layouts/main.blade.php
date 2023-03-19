@@ -14,6 +14,9 @@
         @include('partials.sidebar')
     @endif --}}
     @yield('content')
+    <div class="w-full -translate-x-4">
+        @include('partials.footer')
+    </div>
     @vite('resources/js/app.js')
     @vite('resources/js/jquery-3.6.3.slim.min.js')
     @vite('resources/js/flowbite.js')

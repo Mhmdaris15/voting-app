@@ -94,77 +94,77 @@
 
 
 
-      <div class="grid grid-cols-1 gap-y-10 gap-x-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-
+      <div class="grid grid-cols-1 mx-auto gap-y-10 gap-x-9 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        
         @foreach ($candidates as $candidate)
 
-        <form class="p-5 relative rounded-xl shadow-lg shadow-yellow-100 bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100" action="{{ url('voting') }}/{{ $candidate->id }}" method="post">
+        <form class="p-5 relative flex flex-col justify-between items-start rounded-xl shadow-lg shadow-yellow-100 bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100" action="{{ url('voting') }}/{{ $candidate->id }}" method="post">
           @csrf
           <div class="cursor-pointer" data-modal-toggle="{{ $candidate->name }}" class="group">
             <div class="overflow-hidden rounded-lg bg-gray-200">
               <img src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="{{ $candidate->name }}" class="w-96 h-56 object-cover object-center group-hover:opacity-75">
             </div>
-            <h3 class="mt-4 text-xl font-bold text-gray-700">{{ $candidate->name }}</h3>
+            <h3 class="my-4 text-xl font-bold text-gray-700">{{ $candidate->name }}</h3>
             {{-- <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->votes }}</p> --}}
             {{-- @if($user->role == 'admin')
               <p class="mt-1 text-lg font-medium text-gray-900">Count : {{ $candidate->users->count() }}</p>
               <p>Percentage : {{ $candidate->users->count() / $n_users * 100}} %</p>
             @endif --}}
           </div>
-          <div class="absolute bottom-2 right-4 flex justify-center items-center gap-x-2">
+          <div class="absolute bottom-5 right-4 flex justify-center items-center gap-x-2">
             {{-- <div><img src="https://img.icons8.com/sf-ultralight/25/null/pencil.png"/></div> --}}
             @if($user->role == 'admin')
-            <button type="button" class="bg-red-500 py-1 px-4 rounded-md shadow-sm shadow-gray-600 transition-all ease-in-out hover:bg-red-200" data-modal-toggle="delete-modal-{{ $candidate->id }}"><img src="https://img.icons8.com/material-outlined/24/null/delete-trash.png"/></button>
+            <button type="button" class="bg-red-500 px-5 py-2 rounded-md shadow-sm shadow-gray-600 transition-all ease-in-out hover:bg-red-200" data-modal-toggle="delete-modal-{{ $candidate->id }}"><img src="https://img.icons8.com/material-outlined/24/null/delete-trash.png"/></button>
             @endif
           </div>
           
           <!-- Main modal -->
-<div id="{{ $candidate->name }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-  <div class="relative w-full h-full max-w-2xl md:h-auto">
-      <!-- Modal content -->
-      <div class="relative bg-[#fff9f4] rounded-lg shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                {{ $candidate->name }}
-              </h3>
-              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="{{ $candidate->name }}">
-                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                  <span class="sr-only">Close modal</span>
-              </button>
-          </div>
-          <!-- Modal body -->
+          <div id="{{ $candidate->name }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+            <div class="relative w-full h-full max-w-2xl md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-[#fff9f4] rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                          {{ $candidate->name }}
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="{{ $candidate->name }}">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
 
-          <div class="m-auto my-5 max-w-sm bg-[#fff9f4] border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <a href="#" class="">
-                <img class="rounded-t-lg" src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="" />
-            </a>
-            <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Visi</h5>
-              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $candidate->vision }}</p>
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Misi</h5>
-                  @php
-                    $missions = json_decode($candidate->missions);
-                  @endphp
-              @foreach ($missions as $mission)
-                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $mission }}</p>
-              @endforeach
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Read more
-                    <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </a>
+                    <div class="m-auto my-5 max-w-sm bg-[#fff9f4] border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                      <a href="#" class="">
+                          <img class="rounded-t-lg" src="{{ Vite::asset('resources/images/'.$candidate->photo) }}" alt="" />
+                      </a>
+                      <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Visi</h5>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $candidate->vision }}</p>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Misi</h5>
+                            @php
+                              $missions = json_decode($candidate->missions);
+                            @endphp
+                        @foreach ($missions as $mission)
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $mission }}</p>
+                        @endforeach
+                          <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              Read more
+                              <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                          </a>
+                      </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button data-modal-toggle="{{ $candidate->name }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                        <button data-modal-toggle="{{ $candidate->name }}" type="button" class="text-gray-500 bg-[#fff9f4] hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                    </div>
+                </div>
             </div>
           </div>
-
-          <!-- Modal footer -->
-          <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-              <button data-modal-toggle="{{ $candidate->name }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-              <button data-modal-toggle="{{ $candidate->name }}" type="button" class="text-gray-500 bg-[#fff9f4] hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
-          </div>
-      </div>
-  </div>
-</div>
-          <button type="button" class="my-3 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:opacity-25" {{ (Auth::user()->candidate_id) ? 'disabled' : ''}} data-modal-toggle="vote-confirmation-{{ $candidate->id }}">
+          <button type="button" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:opacity-25" {{ (Auth::user()->candidate_id) ? 'disabled' : ''}} data-modal-toggle="vote-confirmation-{{ $candidate->id }}">
             Vote
           </button>
           <div id="vote-confirmation-{{ $candidate->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">

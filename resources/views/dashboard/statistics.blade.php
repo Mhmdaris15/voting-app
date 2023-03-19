@@ -4,7 +4,6 @@
         <input type="hidden" name="tab-choosen" value="statistics">
         <input type="date" name="showing-time" id="showing-time" class="bg-gray-600 rounded-xl text-gray-50 hover:bg-gray-700 py-3 px-5" required>
         <input type="time" name="detail-time" id="detail-time" class="bg-gray-600 rounded-xl text-gray-50 hover:bg-gray-700 py-3 px-5" required>
-  
         <button type="submit" class="inline-block text-red-700 hover:text-white border border-red-700 bg-red-200 transition-all ease-in-out hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-800">Set End Time</button>    
     </form>
     <div class="relative countdown-timer flex gap-x-10 justify-evenly items-center w-2/3 h-36 text-gray-50 font-extrabold bg-gradient-to-bl from-blue-700 via-blue-800 to-gray-900 rounded-3xl">
@@ -24,23 +23,23 @@
         <input type="hidden" name="time_id" value="{{ $time['id'] }}">
         <button type="submit" class="inline-block text-blue-700 bg-blue-200 transition-all ease-in-out hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:bg-slate-200 disabled:hover:bg-slate-200 disabled:text-blue-400" >IS CLICKED TRUE</button>
     </form> --}}
-    <canvas class="" id="myChart"></canvas>
-    
+    <div class="w-full h-screen">
+        <canvas class="box-content -bottom-48" id="myChart"></canvas>
+    </div>
 </div>
 
 @push('scripts')
     <script src="{{ asset('js/jquery-3.6.3.slim.min.js') }}"></script>
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/chartjs-plugin-datalabels.js') }}"></script>
-
     <script type="text/javascript">
-        // import Datepicker from 'flowbite-datepicker/Datepicker';
-     // we ned ending date and current date and we also need to subtract.
-        
+                // import Datepicker from 'flowbite-datepicker/Datepicker';
+        // we ned ending date and current date and we also need to subtract.
+
 
         // import ChartDataLabels from 'chartjs-plugin-datalabels';
         // import {Chart} from 'chart.js';
-        
+
         let showingTime = @json($time); // declare showingTime variable that contains time variable with string data type from php
         console.log(showingTime);
         // convert is_clicked to boolean
@@ -72,6 +71,9 @@
             type: 'doughnut',
             data: data,
             options : {
+                maintainAspectRatio: false,
+                // width: 100,
+                // height: 100,
                 tooltips: {
                     enabled: true,
                 },
@@ -103,6 +105,13 @@
             },
             plugins: [ChartDataLabels],
         };
+
+        // const options = {
+        //     maintainAspectRatio: false,
+        //     width: 400,
+        //     height: 400
+        // }
+
         $(document).ready(function() {
 
             function formatTime(time) {
@@ -172,7 +181,7 @@
 
             countdown();
 
-            // // Hide Chart for the first time when the page is loaded and show it after 10 seconds
+            // Hide Chart for the first time when the page is loaded and show it after 10 seconds
             // console.log(showingTime > new Date());
             // if (isClicked){
             //     $('#myChart').show();
@@ -186,7 +195,7 @@
             } else {
                 $('#countdown').text('Winner is ' + candidate_names[n_candidate_voters.indexOf(Math.max(...n_candidate_voters))] + ' with ' + Math.max(...n_candidate_voters) + ' votes');
                 $('#countdown').removeClass('text-3xl');
-                $('#countdown').addClass('text-6xl');
+                $('#countdown').addClass('text-4xl');
                 $('#myChart').show();
             }
 
@@ -219,10 +228,10 @@
 
             });
         });
-        
+
         const myChart = new Chart(
             document.getElementById('myChart'),
-            config,
+            config
         );
     </script>
 @endpush
